@@ -61,7 +61,7 @@ public class SmallRyeContextManager implements ContextManager {
 
     public CapturedContextState captureContext(ThreadContextProviderPlan plan) {
         Map<String, String> props = Collections.emptyMap();
-        return new CapturedContextState(this, plan, props);
+        return ContextBoundary.capture(plan, props);
     }
 
     // for tests

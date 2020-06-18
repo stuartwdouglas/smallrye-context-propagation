@@ -7,16 +7,16 @@ import java.util.Map;
 import org.eclipse.microprofile.context.spi.ThreadContextProvider;
 import org.eclipse.microprofile.context.spi.ThreadContextSnapshot;
 
-import io.smallrye.context.SmallRyeContextManager;
+import io.smallrye.context.ContextBoundary;
 
 public class CapturedContextState {
 
-    private List<ThreadContextSnapshot> threadContext = new LinkedList<>();
-    private SmallRyeContextManager context;
+    public static CapturedContextState EMPTY = new CapturedContextState();
 
-    public CapturedContextState(SmallRyeContextManager context, ThreadContextProviderPlan plan,
+    private final List<ThreadContextSnapshot> threadContext = new LinkedList<>();
+
+    public CapturedContextState(ThreadContextProviderPlan plan,
             Map<String, String> props) {
-        this.context = context;
         for (ThreadContextProvider provider : plan.propagatedProviders) {
             ThreadContextSnapshot snapshot = provider.currentContext(props);
             if (snapshot != null) {
@@ -31,7 +31,15 @@ public class CapturedContextState {
         }
     }
 
+    private CapturedContextState() {
+    }
+
     public ActiveContextState begin() {
-        return new ActiveContextState(context, threadContext);
+        if (this == ContextBoundary.currentState()) {
+            //current context is already the same, this is a NOOP
+            return EMPTY.begin();
+        } else {
+            return new ActiveContextState(threadContext);
+        }
     }
 }
