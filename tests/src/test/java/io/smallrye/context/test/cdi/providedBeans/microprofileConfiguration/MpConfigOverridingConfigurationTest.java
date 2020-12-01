@@ -32,8 +32,8 @@ public class MpConfigOverridingConfigurationTest {
             Set<String> propagated = Utils.providersToStringSet(plan.propagatedProviders);
             Assert.assertTrue(propagated.contains(ThreadContext.TRANSACTION));
             Assert.assertTrue(propagated.contains(ThreadContext.CDI));
-            Assert.assertTrue(plan.clearedProviders.size() == 0);
-            Assert.assertTrue(plan.unchangedProviders.size() == 0);
+            Assert.assertTrue(plan.clearedProviders.length == 0);
+            Assert.assertTrue(plan.unchangedProviders.length == 0);
         }
     }
 
@@ -43,24 +43,24 @@ public class MpConfigOverridingConfigurationTest {
         Assert.assertEquals(2, me.getMaxAsync());
         ThreadContextProviderPlan threadContextProviderPlan = me.getThreadContextProviderPlan();
         // CDI context is moved to cleared contexts by MP config
-        Assert.assertTrue(threadContextProviderPlan.clearedProviders.size() == 1);
+        Assert.assertTrue(threadContextProviderPlan.clearedProviders.length == 1);
         Assert.assertEquals(ThreadContext.CDI,
-                threadContextProviderPlan.clearedProviders.iterator().next().getThreadContextType());
+                threadContextProviderPlan.clearedProviders[0].getThreadContextType());
         // indirectly verify that propagated contained all remaining, e.g. transactions will be there
         Set<String> propagated = Utils.providersToStringSet(threadContextProviderPlan.propagatedProviders);
         Assert.assertTrue(propagated.contains(ThreadContext.TRANSACTION));
-        Assert.assertTrue(threadContextProviderPlan.unchangedProviders.size() == 0);
+        Assert.assertTrue(threadContextProviderPlan.unchangedProviders.length == 0);
     }
 
     private void verifyThreadContext(SmallRyeThreadContext tc) {
         ThreadContextProviderPlan threadContextProviderPlan = tc.getPlan();
         // CDI context is moved to cleared contexts by MP config
-        Assert.assertTrue(threadContextProviderPlan.clearedProviders.size() == 1);
+        Assert.assertTrue(threadContextProviderPlan.clearedProviders.length == 1);
         Assert.assertEquals(ThreadContext.CDI,
-                threadContextProviderPlan.clearedProviders.iterator().next().getThreadContextType());
+                threadContextProviderPlan.clearedProviders[0].getThreadContextType());
         // indirectly verify that propagated contained all remaining, e.g. transactions will be there
         Set<String> propagated = Utils.providersToStringSet(threadContextProviderPlan.propagatedProviders);
         Assert.assertTrue(propagated.contains(ThreadContext.TRANSACTION));
-        Assert.assertTrue(threadContextProviderPlan.unchangedProviders.size() == 0);
+        Assert.assertTrue(threadContextProviderPlan.unchangedProviders.length == 0);
     }
 }

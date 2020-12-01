@@ -1,5 +1,5 @@
 package io.smallrye.context.storage;
 
-public abstract class ThreadLocalStorage<T> extends FastThreadLocal<T> {
+public abstract class ThreadLocalStorage<T> extends io.smallrye.context.FastThreadLocal<T> {
 
 }

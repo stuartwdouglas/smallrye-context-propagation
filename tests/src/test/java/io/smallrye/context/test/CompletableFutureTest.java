@@ -297,9 +297,9 @@ public class CompletableFutureTest {
             SmallRyeThreadContext threadContext = managedExecutor.getThreadContext();
             Assert.assertNotNull(threadContext);
             ThreadContextProviderPlan plan = threadContext.getPlan();
-            Assert.assertEquals(4, plan.clearedProviders.size());
-            Assert.assertTrue(plan.unchangedProviders.isEmpty());
-            Assert.assertEquals(1, plan.propagatedProviders.size());
+            Assert.assertEquals(4, plan.clearedProviders.length);
+            Assert.assertTrue(plan.unchangedProviders.length == 0);
+            Assert.assertEquals(1, plan.propagatedProviders.length);
 
             // now make sure ThreadContext can also copy those
             CompletableFuture<String> cf2 = new CompletableFuture<>();

@@ -1,4 +1,4 @@
-package io.smallrye.context.storage;
+package io.smallrye.context;
 
 public interface StorageThread {
 

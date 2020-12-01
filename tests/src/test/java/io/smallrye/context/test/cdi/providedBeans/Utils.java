@@ -32,6 +32,14 @@ public class Utils {
         }
     }
 
+    public static Set<String> providersToStringSet(ThreadContextProvider[] providers) {
+        Set<String> result = new HashSet<>();
+        for (ThreadContextProvider provider : providers) {
+            result.add(provider.getThreadContextType());
+        }
+        return result;
+    }
+
     public static Set<String> providersToStringSet(Set<ThreadContextProvider> providers) {
         Set<String> result = new HashSet<>();
         for (ThreadContextProvider provider : providers) {

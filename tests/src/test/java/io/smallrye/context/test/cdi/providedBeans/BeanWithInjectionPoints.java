@@ -65,8 +65,8 @@ public class BeanWithInjectionPoints {
         Assert.assertEquals(-1, exec.getMaxAsync());
         Assert.assertEquals(-1, exec.getMaxQueued());
         ThreadContextProviderPlan plan = exec.getThreadContextProviderPlan();
-        Assert.assertEquals(0, plan.unchangedProviders.size());
-        Assert.assertEquals(0, plan.clearedProviders.size());
+        Assert.assertEquals(0, plan.unchangedProviders.length);
+        Assert.assertEquals(0, plan.clearedProviders.length);
         Set<String> propagated = providersToStringSet(plan.propagatedProviders);
         Assert.assertTrue(propagated.contains(ThreadContext.CDI));
         Assert.assertTrue(propagated.contains(ThreadContext.TRANSACTION));
@@ -84,7 +84,7 @@ public class BeanWithInjectionPoints {
         Assert.assertEquals(2, exec.getMaxAsync());
         Assert.assertEquals(3, exec.getMaxQueued());
         ThreadContextProviderPlan plan = exec.getThreadContextProviderPlan();
-        Assert.assertEquals(0, plan.unchangedProviders.size());
+        Assert.assertEquals(0, plan.unchangedProviders.length);
         Set<String> propagated = providersToStringSet(plan.propagatedProviders);
         Set<String> cleared = providersToStringSet(plan.clearedProviders);
         Assert.assertTrue(cleared.contains(ThreadContext.CDI));
@@ -101,7 +101,7 @@ public class BeanWithInjectionPoints {
     public void assertConfiguredThreadContext() {
         SmallRyeThreadContext context = unwrapThreadContext(configuredThreadContext);
         ThreadContextProviderPlan plan = context.getPlan();
-        Assert.assertEquals(0, plan.unchangedProviders.size());
+        Assert.assertEquals(0, plan.unchangedProviders.length);
         Set<String> propagated = providersToStringSet(plan.propagatedProviders);
         Set<String> cleared = providersToStringSet(plan.clearedProviders);
         Assert.assertTrue(propagated.contains(ThreadContext.CDI));
@@ -111,8 +111,8 @@ public class BeanWithInjectionPoints {
     public void assertDefaultThreadContext() {
         SmallRyeThreadContext context = unwrapThreadContext(defaultThreadContext);
         ThreadContextProviderPlan plan = context.getPlan();
-        Assert.assertEquals(0, plan.unchangedProviders.size());
-        Assert.assertEquals(0, plan.clearedProviders.size());
+        Assert.assertEquals(0, plan.unchangedProviders.length);
+        Assert.assertEquals(0, plan.clearedProviders.length);
         Set<String> propagated = providersToStringSet(plan.propagatedProviders);
         Assert.assertTrue(propagated.contains(ThreadContext.CDI));
         Assert.assertTrue(propagated.contains(ThreadContext.TRANSACTION));

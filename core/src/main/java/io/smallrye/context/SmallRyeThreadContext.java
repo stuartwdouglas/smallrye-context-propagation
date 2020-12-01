@@ -22,7 +22,7 @@ import io.smallrye.context.impl.ThreadContextProviderPlan;
 
 public class SmallRyeThreadContext implements ThreadContext {
 
-    private final static ThreadLocal<SmallRyeThreadContext> currentThreadContext = new ThreadLocal<>();
+    private final static ThreadLocal<SmallRyeThreadContext> currentThreadContext = new FastThreadLocal<>();
 
     /**
      * Updates the current @{link SmallRyeThreadContext} in use by the current thread, and returns an

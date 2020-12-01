@@ -20,7 +20,6 @@
             <groupId>io.smallrye</groupId>
             <artifactId>smallrye-context-propagation</artifactId>
             <version>${project.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.smallrye</groupId>

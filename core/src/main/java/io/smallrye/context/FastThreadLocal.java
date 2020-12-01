@@ -1,4 +1,4 @@
-package io.smallrye.context.storage;
+package io.smallrye.context;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

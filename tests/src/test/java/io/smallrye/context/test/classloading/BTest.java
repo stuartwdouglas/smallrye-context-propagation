@@ -23,10 +23,10 @@ public class BTest implements BiConsumer<ClassLoader, ClassLoader> {
 
         SmallRyeContextManager contextManager = (SmallRyeContextManager) contextProvider.getContextManager();
         ThreadContextProviderPlan plan = contextManager.getProviderPlan();
-        Assert.assertEquals(1, plan.propagatedProviders.size());
-        Assert.assertEquals("B", plan.propagatedProviders.iterator().next().getThreadContextType());
-        Assert.assertTrue(plan.unchangedProviders.isEmpty());
-        Assert.assertTrue(plan.clearedProviders.isEmpty());
+        Assert.assertEquals(1, plan.propagatedProviders.length);
+        Assert.assertEquals("B", plan.propagatedProviders[0].getThreadContextType());
+        Assert.assertTrue(plan.unchangedProviders.length == 0);
+        Assert.assertTrue(plan.clearedProviders.length == 0);
 
         List<ContextManagerExtension> propagators = SmallRyeContextManagerProvider.getManager().getExtensions();
         Assert.assertEquals(1, propagators.size());
